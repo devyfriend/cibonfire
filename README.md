@@ -1,4 +1,4 @@
-## Backend Featueres
+## Backend Features
 - CodeIgniter 3.x included.
 - Very flexible template/theme system, capable of Wordpress-like parent/child themes.
 - Admin and Default themes, Fully modular and built around HMVC
