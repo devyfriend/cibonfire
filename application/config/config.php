@@ -365,11 +365,11 @@ $config['encryption_key'] = "231b255fc2752e389c63f62b111c6cb1";
 |
  */
 $config['sess_driver'] = 'database';
-$config['sess_cookie_name']		= 'nrdsession';
+$config['sess_cookie_name']		= 'nrds';
 $config['sess_expiration']		= 7200;
 $config['sess_save_path'] = 'ci3_sessions';
 $config['sess_match_ip'] = false;
-$config['sess_time_to_update'] = 300;
+$config['sess_time_to_update'] = 300000000;
 $config['sess_regenerate_destroy'] = false;
 
 /*
@@ -387,7 +387,7 @@ $config['sess_regenerate_destroy'] = false;
 |       'cookie_httponly') will also affect sessions.
 |
  */
-$config['cookie_prefix']	= 'nrdcookie';
+$config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
 $config['cookie_secure'] = false;
