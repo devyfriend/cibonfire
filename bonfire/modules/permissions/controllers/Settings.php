@@ -163,7 +163,7 @@ class Settings extends Admin_Controller
         if ($type == 'insert') {
             $id = $this->permission_model->insert($_POST);
             if($id){
-                $this->db->insert('role_permissions', array('role_id' => $this->current_user, 'permission_id' => $id));
+                $this->db->insert('role_permissions', array('role_id' => $this->current_user->role_id, 'permission_id' => $id));
             }
             return is_numeric($id);
         } elseif ($type == 'update') {
