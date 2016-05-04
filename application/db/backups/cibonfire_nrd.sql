@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Apr 05, 2016 at 06:18 PM
+-- Generation Time: May 04, 2016 at 11:13 PM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.7
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `cibonfire_tester`
+-- Database: `cibonfire_nrd`
 --
 
 -- --------------------------------------------------------
@@ -779,7 +779,8 @@ ALTER TABLE `login_attempts`
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`permission_id`);
+  ADD PRIMARY KEY (`permission_id`),
+  ADD UNIQUE KEY `Name` (`name`);
 
 --
 -- Indexes for table `roles`

@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
  */
-$config['base_url']	= 'http://'.$_SERVER['HTTP_HOST'].'/cibonfire/';
+$config['base_url']	= 'http://'.$_SERVER['HTTP_HOST'].'/cibonfire_nrd/';
 
 /*
 |--------------------------------------------------------------------------
@@ -390,7 +390,7 @@ $config['sess_regenerate_destroy'] = false;
 $config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
-$config['cookie_secure'] = false;
+$config['cookie_secure'] = true;
 $config['cookie_httponly'] = false;
 
 /*
