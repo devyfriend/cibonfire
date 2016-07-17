@@ -68,7 +68,7 @@ if ( ! function_exists('relative_time'))
 			$ending = " yang lalu";
 		}
 		else
-		{	
+		{
 			// this was in the future
 			$difference = -$difference;
 			$ending = "to go";
@@ -331,7 +331,6 @@ if ( ! function_exists('standard_timezone'))
 
 	    return mktime($hours, $minutes, $seconds, $month, $day, $year);
 	}
-
 	function dbdate_to_array($datetime = "")
 	{
 	  // function is only applicable for valid MySQL DATETIME (19 characters) and DATE (10 characters)
@@ -357,7 +356,6 @@ if ( ! function_exists('standard_timezone'))
 		$wday = date('N', $tm);
 		return array('hour' => $hours,'minute' => $minutes, 'second' => $seconds, 'month' => $month, 'day' => $day,'wday' => $wday, 'year' => $year, '0' => $tm);
 	}
-
 	/**
 	* Convert MySQL's DATE (YYYY-MM-DD) or DATETIME (YYYY-MM-DD hh:mm:ss) to date using given format string
 	*
@@ -372,7 +370,6 @@ if ( ! function_exists('standard_timezone'))
 		if(trim($datetime) == '' or $datetime == '0000-00-00 00:00:00') return '';
 	    return date($format, db_to_timestamp($datetime));
 	}
-
 	/**
 	* Convert timestamp to MySQL's DATE or DATETIME (YYYY-MM-DD hh:mm:ss)
 	*
@@ -387,13 +384,11 @@ if ( ! function_exists('standard_timezone'))
 	  if(empty($timestamp) || !is_numeric($timestamp)) $timestamp = time();
 
 	    return ($datetime) ? date("Y-m-d H:i:s", $timestamp) : date("Y-m-d", $timestamp);
-	} 
-
+	}
 	function date_to_db($date)
 	{
 		return date( 'Y-m-d H:i:s', strtotime($date));
 	}
-
 	function now($timestamp = true)
 	{
 		$now = getdate();
@@ -401,4 +396,41 @@ if ( ! function_exists('standard_timezone'))
 	}
 
 
+}
+
+/*
+$tanggal = "2009-12-30 23:59:45";
+echo indonesian_date ($tanggal);
+ */
+function indonesian_date($timestamp = '', $date_format = 'l, j F Y | H:i', $suffix = 'WIB') {
+    if (trim ($timestamp) == '')
+    {
+            $timestamp = time ();
+    }
+    elseif (!ctype_digit ($timestamp))
+    {
+        $timestamp = strtotime ($timestamp);
+    }
+    # remove S (st,nd,rd,th) there are no such things in indonesia :p
+    $date_format = preg_replace ("/S/", "", $date_format);
+    $pattern = array (
+        '/Mon[^day]/','/Tue[^sday]/','/Wed[^nesday]/','/Thu[^rsday]/',
+        '/Fri[^day]/','/Sat[^urday]/','/Sun[^day]/','/Monday/','/Tuesday/',
+        '/Wednesday/','/Thursday/','/Friday/','/Saturday/','/Sunday/',
+        '/Jan[^uary]/','/Feb[^ruary]/','/Mar[^ch]/','/Apr[^il]/','/May/',
+        '/Jun[^e]/','/Jul[^y]/','/Aug[^ust]/','/Sep[^tember]/','/Oct[^ober]/',
+        '/Nov[^ember]/','/Dec[^ember]/','/January/','/February/','/March/',
+        '/April/','/June/','/July/','/August/','/September/','/October/',
+        '/November/','/December/',
+    );
+    $replace = array ( 'Sen','Sel','Rab','Kam','Jum','Sab','Min',
+        'Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu',
+        'Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des',
+        'Januari','Februari','Maret','April','Juni','Juli','Agustus','Sepember',
+        'Oktober','November','Desember',
+    );
+    $date = date ($date_format, $timestamp);
+    $date = preg_replace ($pattern, $replace, $date);
+    $date = "{$date} {$suffix}";
+    return $date;
 }

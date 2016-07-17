@@ -1,6 +1,10 @@
 # Helpful sections not specific to CodeIgniter - excerpted from
 # https://github.com/h5bp/server-configs/
 
+<IfModule mod_env.c>
+  SetEnv CI_ENV "development"
+</IfModule>
+
 # ----------------------------------------------------------------------
 # Proper MIME type for all files
 # ----------------------------------------------------------------------
@@ -155,7 +159,7 @@ AddDefaultCharset utf-8
   # If you installed Bonfire in a subfolder, you will need to
   # change the following line to match the subfolder you need.
   # http://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewritebase
-  RewriteBase /cibonfire_nrd/
+  RewriteBase /cibonfired/
 
   # Removes access to the system folder by users.
   # Additionally this will allow you to create a System.php controller,

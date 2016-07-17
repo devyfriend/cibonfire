@@ -58,3 +58,4 @@ system/.ideas
 deployment.log
 application/config/config.php
 .htaccess
+files/*

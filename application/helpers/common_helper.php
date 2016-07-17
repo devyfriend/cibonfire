@@ -8,8 +8,22 @@ function test($x,$exit=0)
 	}else{
 		echo var_dump($x);
 	}
-	echo "</pre><hr />"; 
+	echo "</pre><hr />";
 	if($exit==1){ die(); }
+}
+
+// check and echoing a string variable
+function _s($var = null, $echo=false){
+	$str = isset($var) && !empty(trim($var)) ? $var : '';
+	if(! $echo) return $str;
+	echo $str;
+}
+
+// check and echoing a object property variable
+function _o($obj, $prop, $echo=false){
+	$str = is_object($obj) && property_exists($obj,$prop) && !empty(trim($obj->$prop)) ? $obj->$prop : '';
+	if(! $echo) return $str;
+	echo $str;
 }
 
 function keyval($arr, $keyname = 'id', $valname = 'name', $switch = false)

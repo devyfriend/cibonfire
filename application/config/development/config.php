@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
  */
-$config['base_url']	= 'http://'.$_SERVER['HTTP_HOST'].'/cibonfire_nrd/';
+$config['base_url']	= 'http://'.$_SERVER['HTTP_HOST'].'/cibonfired/';
 
 /*
 |--------------------------------------------------------------------------
@@ -310,7 +310,7 @@ $config['cache_query_string'] = false;
 | http://codeigniter.com/user_guide/libraries/encryption.html
 |
  */
-$config['encryption_key'] = "231b255fc2752e389c63f62b111c6cb1";
+$config['encryption_key'] = "231b255fc2752e3@devyfriend89c63f62b111c6cb1";
 
 /*
 |--------------------------------------------------------------------------
@@ -365,7 +365,7 @@ $config['encryption_key'] = "231b255fc2752e389c63f62b111c6cb1";
 |
  */
 $config['sess_driver'] = 'database';
-$config['sess_cookie_name']		= 'nrds';
+$config['sess_cookie_name']		= 'dft';
 $config['sess_expiration']		= 7200;
 $config['sess_save_path'] = 'ci3_sessions';
 $config['sess_match_ip'] = false;
@@ -390,7 +390,7 @@ $config['sess_regenerate_destroy'] = false;
 $config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
-$config['cookie_secure'] = true;
+$config['cookie_secure'] = false;
 $config['cookie_httponly'] = false;
 
 /*
