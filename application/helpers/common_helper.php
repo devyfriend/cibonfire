@@ -19,7 +19,7 @@ function _s($var = null, $echo=false){
 	echo $str;
 }
 
-// check and echoing a object property variable
+// check and echoing an object property variable
 function _o($obj, $prop, $echo=false){
 	$str = is_object($obj) && property_exists($obj,$prop) && !empty(trim($obj->$prop)) ? $obj->$prop : '';
 	if(! $echo) return $str;

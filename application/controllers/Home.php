@@ -39,12 +39,6 @@ class Home extends MX_Controller
 		$this->lang->load('application');
 		$this->load->library('events');
 
-        $this->load->library('installer_lib');
-        if (! $this->installer_lib->is_installed()) {
-            $ci =& get_instance();
-            $ci->hooks->enabled = false;
-            redirect('install');
-        }
 
         // Make the requested page var available, since
         // we're not extending from a Bonfire controller

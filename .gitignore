@@ -27,9 +27,9 @@ assets/cache/*
 !assets/cache/index.html
 
 # Ignore Custom config files
-# application/config/development/*
-# application/config/testing/*
-# application/config/production/*
+application/config/development/*
+application/config/testing/*
+application/config/production/*
 # application/config/installed.txt
 
 # but leave the config folders there
@@ -57,5 +57,6 @@ system/.ideas
 # install/installed.txt
 deployment.log
 application/config/config.php
+application/config/database.php
 .htaccess
 files/*
