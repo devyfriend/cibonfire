@@ -8,11 +8,12 @@
 - Built-in users/auth system
 - Code Builder with CRUD generation
 - Simple email queue system
-- Uses multiple-environment config files.
+- Uses multiple-environment config files
 - Migration-ready (using either raw SQL or Database Forge commands)
 - Log view/maintenance
+- Check out the **/docs** for more gems
 
-# How to "install"
+## How to "install"
 1. To start your own project development, Clone this repo .. or better .. fork this repo so you can contribute by pull request
 2. By default, this cibonfired is run at http://localhost/cibonfire, if you cloned other than that eg: http://cibonfire (root not subfolder), make sure you edit the .htaccess and config.php to set the appropriate base_url (remove the "cibonfire" word)
 3. Upload the cibonfire.sql (at /application/db/backups) to phpmyadmin to create "cibonfire" database or any other name that suitable for your project, be sure to check or change the database name at database.php in config folder
@@ -21,4 +22,10 @@
 6. There are already 2 builtin default user with roles:
     * u: **admin@cms**, p: **password**  (admin role)
     * u: **dev@cms**, p: **password**  (developer role)
-7. Have fun
+7. Use the **git.php** as your Webhooks to trigger git pull
+8. Have fun
+
+## Near Future (hopely)
+- Upgrade backend/admin theme to bootstrap 3, or perhaps 4
+
+Special thanks to [cibonfire team](https://github.com/ci-bonfire/Bonfire)

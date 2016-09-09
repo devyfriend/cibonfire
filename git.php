@@ -141,7 +141,7 @@ class Deploy {
 
 
 // This is just an example
-$deploy = new Deploy('cibonfire_nrd');
+// $deploy = new Deploy('cibonfire');
 /*
 $deploy->post_deploy = function() use ($deploy) {
   // hit the wp-admin page to update any db changes
@@ -150,6 +150,7 @@ $deploy->post_deploy = function() use ($deploy) {
 };
 */
 
+$deploy = new Deploy('cibonfire');
 $deploy->execute();
 
 ?>
