@@ -2,7 +2,7 @@
 
 function test($x,$exit=0)
 {
-	echo $res = "<pre>";
+	echo "<pre>";
 	if(is_array($x) || is_object($x)){
 		echo print_r($x);
 	}else{

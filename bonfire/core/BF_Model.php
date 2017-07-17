@@ -459,7 +459,6 @@ class BF_Model extends CI_Model
             && $this->log_user === true
             && ! array_key_exists($this->created_by_field, $data)
         ) {
-            $data[$this->created_field] = $this->set_date();
             $data[$this->created_by_field] = $this->auth->user_id();
         }
 
@@ -551,7 +550,6 @@ class BF_Model extends CI_Model
             && $this->log_user === true
             && ! array_key_exists($this->modified_by_field, $data)
         ) {
-            $data[$this->modified_field] = $this->set_date();
             $data[$this->modified_by_field] = $this->auth->user_id();
         }
 
