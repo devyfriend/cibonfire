@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.0
+-- version 4.4.10
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: May 04, 2016 at 11:13 PM
+-- Generation Time: Jul 17, 2017 at 09:11 PM
 -- Server version: 5.5.42
--- PHP Version: 5.6.7
+-- PHP Version: 5.6.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,10 +14,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cibonfire_nrd`
+-- Database: `cibonfire`
 --
 
 -- --------------------------------------------------------
@@ -33,36 +33,17 @@ CREATE TABLE `activities` (
   `module` varchar(255) NOT NULL,
   `created_on` datetime NOT NULL,
   `deleted` tinyint(12) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `activities`
 --
 
 INSERT INTO `activities` (`activity_id`, `user_id`, `activity`, `module`, `created_on`, `deleted`) VALUES
-(1, 2, 'logged in from: ::1', 'users', '2016-04-05 17:56:43', 0),
-(2, 1, 'logged in from: ::1', 'users', '2016-04-05 17:57:58', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ci3_sessions`
---
-
-CREATE TABLE `ci3_sessions` (
-  `id` varchar(40) NOT NULL,
-  `ip_address` varchar(45) NOT NULL,
-  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
-  `data` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `ci3_sessions`
---
-
-INSERT INTO `ci3_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('3cb573ab593ec207c7b60714fe76de2f4c5564fe', '::1', 1459853854, 0x5f5f63695f6c6173745f726567656e65726174657c693a313435393835333830313b7265717565737465645f706167657c733a36383a22687474703a2f2f6c6f63616c686f73742f6369626f6e666972655f7465737465722f61646d696e2f73657474696e67732f726f6c65732f6d61747269785f757064617465223b757365725f69647c733a313a2232223b617574685f637573746f6d7c733a373a226a75726167616e223b757365725f746f6b656e7c733a34303a2236353862353561346434333531383539613039643338343538386361636562356563343535363866223b6964656e746974797c733a373a2264657640636d73223b726f6c655f69647c733a313a2236223b6c6f676765645f696e7c623a313b6c616e67756167657c733a373a22656e676c697368223b70726576696f75735f706167657c733a36383a22687474703a2f2f6c6f63616c686f73742f6369626f6e666972655f7465737465722f61646d696e2f73657474696e67732f726f6c65732f6d61747269785f757064617465223b),
-('b97519503e6d0ce55f206a2361ea4fdcfcf6b601', '::1', 1459853878, 0x5f5f63695f6c6173745f726567656e65726174657c693a313435393835333837323b7265717565737465645f706167657c733a34373a22687474703a2f2f6c6f63616c686f73742f6369626f6e666972655f7465737465722f61646d696e2f636f6e74656e74223b70726576696f75735f706167657c733a34373a22687474703a2f2f6c6f63616c686f73742f6369626f6e666972655f7465737465722f61646d696e2f636f6e74656e74223b757365725f69647c733a313a2231223b617574685f637573746f6d7c733a353a2261646d696e223b757365725f746f6b656e7c733a34303a2266383237646564393638613661646637343432386435323761646333336533393036363736666163223b6964656e746974797c733a393a2261646d696e40636d73223b726f6c655f69647c733a313a2231223b6c6f676765645f696e7c623a313b6c616e67756167657c733a373a22656e676c697368223b);
+(1, 2, 'logged in from: ::1', 'users', '2016-04-05 15:10:21', 0),
+(2, 1, 'logged in from: ::1', 'users', '2017-02-14 13:33:05', 0),
+(3, 2, 'logged in from: ::1', 'users', '2017-02-14 13:33:20', 0),
+(4, 2, 'logged in from: ::1', 'users', '2017-07-17 20:46:32', 0);
 
 -- --------------------------------------------------------
 
@@ -463,7 +444,6 @@ CREATE TABLE `role_permissions` (
 --
 
 INSERT INTO `role_permissions` (`role_id`, `permission_id`) VALUES
-(1, 2),
 (6, 2),
 (6, 3),
 (6, 4),
@@ -536,11 +516,10 @@ INSERT INTO `schema_version` (`type`, `version`) VALUES
 --
 
 CREATE TABLE `sessions` (
-  `session_id` varchar(40) NOT NULL DEFAULT '0',
-  `ip_address` varchar(45) NOT NULL DEFAULT '0',
-  `user_agent` varchar(120) NOT NULL,
-  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
-  `user_data` text NOT NULL
+  `id` varchar(40) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
+  `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -713,8 +692,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `email`, `username`, `password_hash`, `reset_hash`, `last_login`, `last_ip`, `created_on`, `deleted`, `reset_by`, `banned`, `ban_message`, `display_name`, `display_name_changed`, `timezone`, `language`, `active`, `activate_hash`, `force_password_reset`) VALUES
-(1, 1, 'admin@cms', 'admin', '$2a$08$bfTeoW1rgi2OPY7fkk0M4uQ/VsP/MS0JD2TEWuwHA/Q2ElIp36JKi', NULL, '2016-04-05 17:57:58', '::1', '2015-09-01 01:25:04', 0, NULL, 0, NULL, 'Admin', NULL, 'UM6', 'english', 1, '', 0),
-(2, 6, 'dev@cms', 'juragan', '$2a$08$bfTeoW1rgi2OPY7fkk0M4uQ/VsP/MS0JD2TEWuwHA/Q2ElIp36JKi', NULL, '2016-04-05 17:56:43', '::1', '2015-09-01 01:25:04', 0, NULL, 0, NULL, 'Juragan', NULL, 'UM6', 'english', 1, '', 0);
+(1, 1, 'admin@cms', 'admin', '$2a$08$bfTeoW1rgi2OPY7fkk0M4uQ/VsP/MS0JD2TEWuwHA/Q2ElIp36JKi', NULL, '2017-02-14 13:33:05', '::1', '2015-09-01 01:25:04', 0, NULL, 0, NULL, 'Admin', NULL, 'UM6', 'english', 1, '', 0),
+(2, 6, 'dev@cms', 'juragan', '$2a$08$bfTeoW1rgi2OPY7fkk0M4uQ/VsP/MS0JD2TEWuwHA/Q2ElIp36JKi', NULL, '2017-07-17 20:46:32', '::1', '2015-09-01 01:25:04', 0, NULL, 0, NULL, 'Juragan', NULL, 'UM6', 'english', 1, '', 0);
 
 -- --------------------------------------------------------
 
@@ -752,12 +731,6 @@ ALTER TABLE `activities`
   ADD PRIMARY KEY (`activity_id`);
 
 --
--- Indexes for table `ci3_sessions`
---
-ALTER TABLE `ci3_sessions`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `countries`
 --
 ALTER TABLE `countries`
@@ -779,8 +752,7 @@ ALTER TABLE `login_attempts`
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`permission_id`),
-  ADD UNIQUE KEY `Name` (`name`);
+  ADD PRIMARY KEY (`permission_id`);
 
 --
 -- Indexes for table `roles`
@@ -804,7 +776,7 @@ ALTER TABLE `schema_version`
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
-  ADD PRIMARY KEY (`session_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `settings`
@@ -845,7 +817,7 @@ ALTER TABLE `user_meta`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `activity_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `activity_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `email_queue`
 --
