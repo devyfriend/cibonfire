@@ -1,6 +1,6 @@
 <?php (defined('BASEPATH')) OR exit('No direct script access allowed');
 
-function test($x,$exit=0)
+function test(&$x,$exit=0)
 {
 	echo "<pre>";
 	if(is_array($x) || is_object($x)){
@@ -13,7 +13,7 @@ function test($x,$exit=0)
 }
 
 // check and echoing a string variable
-function _s($var = null, $echo=false){
+function _s(&$var = null, $echo=false){
 	$str = isset($var) && !empty(trim($var)) ? $var : '';
 	if(! $echo) return $str;
 	echo $str;

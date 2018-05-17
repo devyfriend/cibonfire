@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
@@ -391,6 +391,16 @@ class CI_Image_lib {
 		{
 			$this->initialize($props);
 		}
+
+		/**
+		 * A work-around for some improperly formatted, but
+		 * usable JPEGs; known to be produced by Samsung
+		 * smartphones' front-facing cameras.
+		 *
+		 * @see	https://github.com/bcit-ci/CodeIgniter/issues/4967
+		 * @see	https://bugs.php.net/bug.php?id=72404
+		 */
+		ini_set('gd.jpeg_ignore_warning', 1);
 
 		log_message('info', 'Image Lib Class Initialized');
 	}
@@ -825,7 +835,10 @@ class CI_Image_lib {
 		imagedestroy($dst_img);
 		imagedestroy($src_img);
 
-		chmod($this->full_dst_path, $this->file_permissions);
+		if ($this->dynamic_output !== TRUE)
+		{
+			chmod($this->full_dst_path, $this->file_permissions);
+		}
 
 		return TRUE;
 	}
@@ -962,7 +975,7 @@ class CI_Image_lib {
 			$cmd_inner = 'pnmscale -xysize '.$this->width.' '.$this->height;
 		}
 
-		$cmd = $this->library_path.$cmd_in.' '.$this->full_src_path.' | '.$cmd_inner.' | '.$cmd_out.' > '.$this->dest_folder.'netpbm.tmp';
+		$cmd = $this->library_path.$cmd_in.' '.escapeshellarg($this->full_src_path).' | '.$cmd_inner.' | '.$cmd_out.' > '.$this->dest_folder.'netpbm.tmp';
 
 		$retval = 1;
 		// exec() might be disabled
@@ -1194,7 +1207,7 @@ class CI_Image_lib {
 		}
 
 		// Build the finalized image
-		if ($wm_img_type === 3 && function_exists('imagealphablending'))
+		if ($wm_img_type === 3)
 		{
 			@imagealphablending($src_img, TRUE);
 		}
@@ -1538,7 +1551,16 @@ class CI_Image_lib {
 	 */
 	public function image_display_gd($resource)
 	{
-		header('Content-Disposition: filename='.$this->source_image.';');
+		// RFC 6266 allows for multibyte filenames, but only in UTF-8,
+		// so we have to make it conditional ...
+		$filename = basename(empty($this->new_image) ? $this->source_image : $this->new_image);
+		$charset = strtoupper(config_item('charset'));
+		$utf8_filename = ($charset !== 'UTF-8')
+			? get_instance()->utf8->convert_to_utf8($filename, $charset)
+			: $filename;
+		isset($utf8_filename[0]) && $utf8_filename = " filename*=UTF-8''".rawurlencode($utf8_filename);
+
+		header('Content-Disposition: filename="'.$filename.'";'.$utf8_filename);
 		header('Content-Type: '.$this->mime_type);
 		header('Content-Transfer-Encoding: binary');
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s', time()).' GMT');
